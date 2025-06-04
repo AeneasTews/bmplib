@@ -31,7 +31,7 @@ int writePixelArray(Pixel* pixels, int width, int height, FILE* file) {
         padding[i] = 0;
     }
 
-    printf("Debug: size of padding: %ld\n", sizeof(padding));
+    //printf("Debug: size of padding: %ld\n", sizeof(padding));
     for (int i = 0; i < height; i++) {
         fwrite(&pixels[i * width], sizeof(Pixel), width, file);
         fwrite(padding, sizeof(padding), 1, file);
@@ -123,4 +123,12 @@ void printPixel(Pixel* p) {
 
 void setPixelToRGB(Pixel* pixels, uint8_t red, uint8_t green, uint8_t blue, int x, int y, int width) {
     pixels[y * width + x] = Pixel(blue, green, red);
+}
+
+void drawRectangle(Pixel* pixels, int x, int y, int rectWidth, int rectHeight, uint8_t red, uint8_t green, uint8_t blue, int width) {
+    for (int i = 0; i < rectHeight; i++) {
+        for (int j = 0; j < rectWidth; j++) {
+            setPixelToRGB(pixels, red, green, blue, x + j, y + i, width);
+        }
+    }
 }

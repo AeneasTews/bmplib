@@ -4,8 +4,8 @@
 
 int main() {
     const char* filename = "output.bmp";
-    int width = 5000;
-    int height = 5000;
+    int width = 500;
+    int height = 500;
 
     Pixel* pixels = createPixelArray(width, height);
 
@@ -16,7 +16,9 @@ int main() {
             double greenFraction = ((float) y / (height - 1));
             double blueFraction = ((float) ((width + height) - (x + y)) / (width + height - 2));
             setPixelToRGB(pixels, 255.999f * redFraction, 255.999f * greenFraction, 255.999f * blueFraction, x, y, width);
-            
+
+            /*
+             *debug to check coordinates
             if (300 > y && y > 200) {
                 setPixelToRGB(pixels, 0, 0, 0, x, y, width);
             }
@@ -24,8 +26,12 @@ int main() {
             if (300 > x && x > 200) {
                 setPixelToRGB(pixels, 0, 0, 0, x, y, width);
             }
+            */
         }
     }
+
+    // test rectangle function
+    drawRectangle(pixels, 10, 10, 80, 50, 255, 0, 0, width);
 
     if (writeBMP(filename, width, height, pixels) != 0) {
         fprintf(stderr, "Error writing BMP file\n");
